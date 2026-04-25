@@ -4,6 +4,8 @@ import joblib
 import plotly.graph_objects as go
 import os
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # ── Page Config ───────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="IPL Win Predictor",
@@ -155,11 +157,11 @@ div[data-testid="stNumberInput"] > div {
 # ── Load Model ────────────────────────────────────────────────────────────────
 @st.cache_resource
 def load_model():
-    if os.path.exists('best_model.pkl'):
-        model = joblib.load('best_model.pkl')
-    else:
-        model = joblib.load('model.pkl')
-    le = joblib.load('label_encoder.pkl')
+    best = os.path.join(BASE_DIR, 'best_model.pkl')
+    fallback = os.path.join(BASE_DIR, 'model.pkl')
+    le_path = os.path.join(BASE_DIR, 'label_encoder.pkl')
+    model = joblib.load(best if os.path.exists(best) else fallback)
+    le = joblib.load(le_path)
     return model, le
 
 try:
