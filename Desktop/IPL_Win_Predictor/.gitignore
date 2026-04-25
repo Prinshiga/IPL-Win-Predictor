@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+notebooks/
+
+# Large data files (not needed for the app)
+data/deliveries.csv
+data/matches.csv
+
+# OS
+.DS_Store
+Thumbs.db
